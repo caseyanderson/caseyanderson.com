@@ -1,40 +1,67 @@
-<img src="/public/cover.jpg" alt="Cover image representing Nim, a personal website template" width="100%" />
+# Casey Anderson
 
-Nim is a free and open-source personal website template built with Next.js 15, React 19, Tailwind CSS v4, and Motion. Designed for developers, designers, and founders, it combines minimalism with delightful animated components powered by [Motion-Primitives](https://motion-primitives.com).
+Personal portfolio built with Next.js 15, React 19, Tailwind CSS 4, and MDX.
+Hosted on Vercel.
 
-Live demo: [https://nim-fawn.vercel.app](https://nim-fawn.vercel.app)
+## Local development
 
-## Features
+Use Node.js 22 or 24 LTS and npm.
 
-- Minimal one-page portfolio layout.
-- Blog support with MDX.
-- Responsive and accessible design.
-- Easy to use
-- [Motion-Primitives](https://motion-primitives.com) for animated components.
-
-## Getting Started
-
-For detailed setup instructions, refer to the [Installation Guide](./INSTALLATION.md).
-
-```bash
-git clone https://github.com/ibelick/nim.git
-cd nim
-npm install
+```sh
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Development uses Webpack, the compatible default for
+this project. To compare Turbopack locally, stop the server and try
+`npm run dev:turbo`. Both support the MDX pages; neither is guaranteed faster
+on every machine or on a first compile.
+Restart the server after updating dependencies or changing the Next.js config.
 
-## Contributing
+Development compiles pages on demand, so the first visit is slower than repeat
+visits. It also includes debugging tools that aren't shipped to visitors.
+`node_modules` contains installed dependencies; `.next-dev` and `.next` are
+generated output. None should be committed.
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve Nim.
+## Checks and production preview
 
-## Deployment
+```sh
+npm run lint
+npm run typecheck
+npm run build
+npm start
+```
 
-You can deploy your site to any hosting platform that supports Next.js. For the easiest deployment experience, consider using Vercel:
+If development is still using port 3000, preview production on another port:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fibelick%2Fnim&env=NEXT_PUBLIC_SITE_URL&project-name=nim&repository-name=nim&redirect-url=https%3A%2F%2Ftwitter.com%2Fibelick&demo-title=Nim&demo-description=Nim%20is%20a%20free%20and%20open-source%20minimal%20personal%20website%20template%20built%20with%20Next.js%2015%2C%20React%2019%2C%20and%20Motion-Primitives.&demo-url=https%3A%2F%2Fnim.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2Fibelick%2Fnim%2Frefs%2Fheads%2Fmain%2F.github%2Fassets%2Freadme.png&teamSlug=ibelick)
+```sh
+npm start -- --port 3002
+npm run test:smoke -- http://localhost:3002
+```
 
-## About
+Development output (`.next-dev`) and production output (`.next`) are separate,
+so building does not overwrite the development server's files.
+The smoke test checks all project pages, local images, embeds, redirects,
+robots.txt, and the sitemap. It requires a running server.
 
-Nim is designed to make personal branding effortless and beautiful. If you enjoy it, consider sharing it and exploring [Motion-Primitives Pro](https://pro.motion-primitives.com/).
+## Editing content
+
+See [INSTALLATION.md](./INSTALLATION.md) for the content workflow.
+
+- `app/work/<slug>/page.mdx`: project content and homepage metadata.
+- `app/data.ts`: email and social links.
+- `app/personal.tsx`: server-rendered homepage content.
+- `mdx-components.tsx`: shared images and media embeds.
+- `lib/work-images.ts`: image imports, dimensions, and default alternative text.
+- `lib/constants.ts`: public website URL used in metadata and the sitemap.
+- `components/ui`: interactive hover and scroll effects.
+
+Pages are statically generated at build time. Publishing changes to Vercel
+requires a new deployment; running or testing locally does not deploy anything.
+Pushing to the production-connected branch may trigger a Vercel deployment.
+
+## Credits
+
+Originally based on [Nim](https://github.com/ibelick/nim) by ibelick,
+with interactive components adapted from
+[Motion-Primitives](https://motion-primitives.com/).

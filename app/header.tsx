@@ -1,5 +1,3 @@
-'use client'
-import { TextEffect } from '@/components/ui/text-effect'
 import Link from 'next/link'
 
 export function Header() {
@@ -9,15 +7,10 @@ export function Header() {
         <Link href="/" className="font-medium text-black dark:text-white">
           Casey Anderson
         </Link>
-        <TextEffect
-          as="p"
-          preset="fade"
-          per="char"
-          className="text-zinc-600 dark:text-zinc-500"
-          delay={0.5}
-        >
-          Musician / Sound Artist, Creative Technologist, Educator, Community Organizer
-        </TextEffect>
+        <p className="text-zinc-600 dark:text-zinc-500">
+          Musician / Sound Artist, Creative Technologist, Educator, Community
+          Organizer
+        </p>
       </div>
     </header>
   )

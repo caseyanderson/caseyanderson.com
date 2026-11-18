@@ -12,13 +12,19 @@ import {
 
 export type AnimatedBackgroundProps = {
   children:
-    | ReactElement<{ 'data-id': string }>[]
-    | ReactElement<{ 'data-id': string }>
+    ReactElement<BackgroundItemProps>[] | ReactElement<BackgroundItemProps>
   defaultValue?: string
   onValueChange?: (newActiveId: string | null) => void
   className?: string
   transition?: Transition
   enableHover?: boolean
+}
+
+type BackgroundItemProps = {
+  'data-id': string
+  'data-checked'?: string
+  className?: string
+  children?: React.ReactNode
 }
 
 export function AnimatedBackground({
@@ -46,7 +52,7 @@ export function AnimatedBackground({
     }
   }, [defaultValue])
 
-  return Children.map(children, (child: any, index) => {
+  return Children.map(children, (child) => {
     const id = child.props['data-id']
 
     const interactionProps = enableHover
@@ -61,7 +67,6 @@ export function AnimatedBackground({
     return cloneElement(
       child,
       {
-        key: index,
         className: cn('relative inline-flex', child.props.className),
         'data-checked': activeId === id ? 'true' : 'false',
         ...interactionProps,
