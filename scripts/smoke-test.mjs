@@ -20,6 +20,32 @@ function decodeHtml(value) {
     .replaceAll('&amp;', '&')
 }
 
+function checkLinks(html, path) {
+  for (const [anchor, href] of html.matchAll(
+    /<a\b[^>]*\bhref="([^"]*)"[^>]*>/g,
+  )) {
+    const url = new URL(decodeHtml(href), 'https://caseyanderson.com')
+    const external =
+      /^https?:$/.test(url.protocol) &&
+      url.origin !== 'https://caseyanderson.com'
+    if (external) {
+      assert.match(
+        anchor,
+        /\btarget="_blank"/,
+        `${path}: external link needs a new tab`,
+      )
+      const rel = anchor.match(/\brel="([^"]*)"/)?.[1].split(/\s+/) || []
+      assert.ok(rel.includes('noopener') && rel.includes('noreferrer'))
+    } else {
+      assert.doesNotMatch(
+        anchor,
+        /\btarget="_blank"/,
+        `${path}: internal/email/anchor link should not open a new tab`,
+      )
+    }
+  }
+}
+
 async function get(path) {
   const start = performance.now()
   const response = await fetch(new URL(path, base))
@@ -30,6 +56,7 @@ async function get(path) {
 }
 
 const home = await get('/')
+checkLinks(home, '/')
 assert.ok(home.includes('Casey Anderson'), 'Homepage title is missing')
 assert.ok(
   !home.includes('filter:blur(8px)'),
@@ -40,6 +67,7 @@ for (const slug of slugs) {
   assert.ok(home.includes(`/work/${slug}`), `Homepage link missing: ${slug}`)
   const path = `/work/${slug}`
   const html = await get(path)
+  checkLinks(html, path)
   const mdx = await readFile(new URL(`${slug}/page.mdx`, workDirectory), 'utf8')
   const { data } = matter(mdx)
   assert.ok(html.includes('<main'), `${path}: missing main content`)

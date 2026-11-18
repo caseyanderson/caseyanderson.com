@@ -1,28 +1,8 @@
 import type { MDXComponents } from 'mdx/types'
-import type { ComponentProps, CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { WEBSITE_URL } from '@/lib/constants'
+import { SiteLink } from '@/components/site-link'
 import { WORK_IMAGES } from '@/lib/work-images'
-
-const siteOrigin = new URL(WEBSITE_URL).origin
-
-function MdxLink({ href, target, rel, ...props }: ComponentProps<'a'>) {
-  const url = href ? new URL(href, WEBSITE_URL) : null
-  const isInternal =
-    !!href && !href.startsWith('#') && url?.origin === siteOrigin
-  const isExternal = !!href && /^(https?:)?\/\//i.test(href) && !isInternal
-  const linkTarget = target ?? (isExternal ? '_blank' : undefined)
-  const linkRel =
-    linkTarget === '_blank'
-      ? [rel, 'noopener', 'noreferrer'].filter(Boolean).join(' ')
-      : rel
-
-  if (isInternal && href) {
-    return <Link href={href} target={linkTarget} rel={linkRel} {...props} />
-  }
-  return <a href={href} target={linkTarget} rel={linkRel} {...props} />
-}
 
 function Cover({ src, alt }: { src: string; alt?: string }) {
   const cover = WORK_IMAGES[src]
@@ -122,7 +102,7 @@ function Bandcamp({
 }
 
 const components = {
-  a: MdxLink,
+  a: SiteLink,
   Cover,
   YouTube,
   Vimeo,
