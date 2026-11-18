@@ -4,7 +4,15 @@ import Image from 'next/image'
 import { SiteLink } from '@/components/site-link'
 import { WORK_IMAGES } from '@/lib/work-images'
 
-function Cover({ src, alt }: { src: string; alt?: string }) {
+function Cover({
+  src,
+  alt,
+  caption,
+}: {
+  src: string
+  alt?: string
+  caption?: string
+}) {
   const cover = WORK_IMAGES[src]
   if (!cover) {
     throw new Error(
@@ -19,6 +27,11 @@ function Cover({ src, alt }: { src: string; alt?: string }) {
         sizes="(max-width: 640px) calc(100vw - 32px), 608px"
         style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
       />
+      {caption && (
+        <figcaption className="mt-2 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+          {caption}
+        </figcaption>
+      )}
     </figure>
   )
 }

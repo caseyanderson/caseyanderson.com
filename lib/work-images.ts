@@ -6,6 +6,7 @@ import emy from '@/public/images/matador.jpg'
 import faithfully from '@/public/images/detour_photo_by_werder4.jpg'
 import ghostses from '@/public/images/AWP007-front_1000.jpg'
 import kaosKids from '@/public/images/robot-youth-SFAA-Feb262024-Newspaper_695.jpg'
+import sankofaRed from '@/public/images/sankofa-red-vision-reopening.jpg'
 import makingLab from '@/public/images/making-lab.jpg'
 import makingLabSpace from '@/public/images/mdp_making_lab_03-940x520.jpg'
 import radios from '@/public/images/radios_cover_v2.jpg'
@@ -35,6 +36,11 @@ export const WORK_IMAGES: Record<
   'robot-youth-SFAA-Feb262024-Newspaper_695.jpg': {
     image: kaosKids,
     alt: 'KAOS Kids',
+  },
+  'sankofa-red-vision-reopening.jpg': {
+    // EXIF orientation displays the unchanged original as a portrait image.
+    image: { ...sankofaRed, width: 3000, height: 4000 },
+    alt: 'Sankofa Red payphone with its red handset outside KAOS Network during the November 2026 Vision Theatre grand reopening celebration',
   },
   // Turbopack doesn't recognize uppercase .JPG imports. Keep the original public
   // URL and its measured dimensions instead of renaming an existing asset.
