@@ -1,6 +1,5 @@
 import createMDX from '@next/mdx'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -20,8 +19,19 @@ const nextConfig = {
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+    // Ignore YAML frontmatter in page content. The homepage reads it via gray-matter.
+    // Plugin names (rather than imported functions) also work with Turbopack.
+    remarkPlugins: ['remark-frontmatter'],
   },
 })
 
-export default withMDX(nextConfig)
+const config = (phase) =>
+  withMDX({
+    ...nextConfig,
+    // Keep development and production output separate so a build cannot break dev.
+    distDir:
+      process.env.NEXT_DIST_DIR ||
+      (phase === PHASE_DEVELOPMENT_SERVER ? '.next-dev' : '.next'),
+  })
+
+export default config

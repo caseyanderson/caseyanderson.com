@@ -35,6 +35,9 @@ export function Magnetic({
   const springY = useSpring(y, springOptions)
 
   useEffect(() => {
+    // Don't measure every social link on every mouse movement across the page.
+    if (!isHovered) return
+
     const calculateDistance = (e: MouseEvent) => {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect()
@@ -61,7 +64,7 @@ export function Magnetic({
     return () => {
       document.removeEventListener('mousemove', calculateDistance)
     }
-  }, [ref, isHovered, intensity, range])
+  }, [isHovered, intensity, range, x, y])
 
   useEffect(() => {
     if (actionArea === 'parent' && ref.current?.parentElement) {
