@@ -40,7 +40,7 @@ export const WORK_IMAGES: Record<
   // URL and its measured dimensions instead of renaming an existing asset.
   'DSC00451_1000.JPG': {
     image: { src: '/images/DSC00451_1000.JPG', width: 1000, height: 666 },
-    alt: 'Laboratwa Elektwonik Matènwa',
+    alt: 'Laboratwa Elektronik Matènwa',
   },
   'making-lab.jpg': { image: makingLab, alt: 'The Making Lab' },
   'mdp_making_lab_03-940x520.jpg': {
