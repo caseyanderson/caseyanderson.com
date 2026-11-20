@@ -8,8 +8,8 @@ export function Header() {
           Casey Anderson
         </Link>
         <p className="text-zinc-600 dark:text-zinc-500">
-          Musician / Sound Artist, Creative Technologist, Educator, Community
-          Organizer
+          Musician &amp; Sound Artist, Educator, Community
+          Organizer, Arts Producer, Creative Technologist
         </p>
       </div>
     </header>
