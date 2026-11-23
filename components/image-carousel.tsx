@@ -82,7 +82,7 @@ export function ImageCarousel({
             onClick={() => goTo(index - 1)}
             disabled={index === 0}
             aria-label="Previous photo"
-            className="min-h-11 px-2 text-zinc-700 disabled:cursor-default disabled:opacity-35 dark:text-zinc-300"
+            className="min-h-11 cursor-pointer px-2 text-zinc-700 disabled:cursor-default disabled:opacity-35 dark:text-zinc-300"
           >
             ← Previous
           </button>
@@ -94,7 +94,7 @@ export function ImageCarousel({
             onClick={() => goTo(index + 1)}
             disabled={index === slides.length - 1}
             aria-label="Next photo"
-            className="min-h-11 px-2 text-zinc-700 disabled:cursor-default disabled:opacity-35 dark:text-zinc-300"
+            className="min-h-11 cursor-pointer px-2 text-zinc-700 disabled:cursor-default disabled:opacity-35 dark:text-zinc-300"
           >
             Next →
           </button>
