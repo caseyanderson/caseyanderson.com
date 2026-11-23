@@ -14,12 +14,57 @@ import rainforest from '@/public/images/Southland-Rainforest-Rauch-Web-0379_800.
 import tradeSchool from '@/public/images/TS-still-here.jpg'
 import yonTiVizit from '@/public/images/AWP011-web-front.jpg'
 import type { StaticImageData } from 'next/image'
+import masksCover from '@/public/images/illuminated-heritage-masks/dsc05303.jpg'
+import masksMaterials from '@/public/images/illuminated-heritage-masks/00-dsc04879.jpg'
+import masksCircuitHelp from '@/public/images/illuminated-heritage-masks/0-dsc05005.jpg'
+import masksDemonstration from '@/public/images/illuminated-heritage-masks/dsc04865.jpg'
+import masksDecorated from '@/public/images/illuminated-heritage-masks/dsc04870.jpg'
+import masksLed from '@/public/images/illuminated-heritage-masks/dsc04920.jpg'
+import masksTable from '@/public/images/illuminated-heritage-masks/dsc04983.jpg'
+import masksRoom from '@/public/images/illuminated-heritage-masks/dsc05118.jpg'
+import masksFinished from '@/public/images/illuminated-heritage-masks/dsc05263.jpg'
 
 // Static imports give Next.js the real image dimensions without runtime file reads.
 export const WORK_IMAGES: Record<
   string,
   { image: StaticImageData; alt: string }
 > = {
+  'illuminated-heritage-masks/dsc05303.jpg': {
+    image: masksCover,
+    alt: 'A participant holds up a white mask with glowing LEDs that cast red light across their face',
+  },
+  'illuminated-heritage-masks/00-dsc04879.jpg': {
+    image: masksMaterials,
+    alt: 'Conductive tape, wires, scissors, and mask-making materials on a workshop table',
+  },
+  'illuminated-heritage-masks/0-dsc05005.jpg': {
+    image: masksCircuitHelp,
+    alt: 'Casey Anderson helps a participant assemble a small circuit at the workshop table',
+  },
+  'illuminated-heritage-masks/dsc04865.jpg': {
+    image: masksDemonstration,
+    alt: 'Casey Anderson demonstrates a white mask while addressing the workshop',
+  },
+  'illuminated-heritage-masks/dsc04870.jpg': {
+    image: masksDecorated,
+    alt: 'A participant holds a colorful decorated mask with long feathers',
+  },
+  'illuminated-heritage-masks/dsc04920.jpg': {
+    image: masksLed,
+    alt: 'A participant tests a glowing purple LED held between their fingers',
+  },
+  'illuminated-heritage-masks/dsc04983.jpg': {
+    image: masksTable,
+    alt: 'A workshop collaborator assists two participants with their mask-making materials',
+  },
+  'illuminated-heritage-masks/dsc05118.jpg': {
+    image: masksRoom,
+    alt: 'Participants and facilitators work around tables inside Octavia Lab',
+  },
+  'illuminated-heritage-masks/dsc05263.jpg': {
+    image: masksFinished,
+    alt: 'A participant wears a cylindrical cardboard mask illuminated by a blue LED',
+  },
   'alvin-lucier-hero_display_horizontal.jpg': {
     image: alvin,
     alt: 'Alvin Lucier',

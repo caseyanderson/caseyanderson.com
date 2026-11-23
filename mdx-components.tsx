@@ -3,6 +3,29 @@ import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import { SiteLink } from '@/components/site-link'
 import { WORK_IMAGES } from '@/lib/work-images'
+import { ImageCarousel } from '@/components/image-carousel'
+
+function Carousel({
+  sources,
+  label,
+  credit,
+}: {
+  sources: string[]
+  label: string
+  credit?: string
+}) {
+  if (!sources.length || !label.trim()) {
+    throw new Error('Add images and a descriptive label to Carousel.')
+  }
+  const slides = sources.map((src) => {
+    const image = WORK_IMAGES[src]
+    if (!image) {
+      throw new Error(`Register "${src}" in lib/work-images.ts before using Carousel.`)
+    }
+    return image
+  })
+  return <ImageCarousel slides={slides} label={label} credit={credit} />
+}
 
 function Cover({
   src,
@@ -117,6 +140,7 @@ function Bandcamp({
 const components = {
   a: SiteLink,
   Cover,
+  Carousel,
   YouTube,
   Vimeo,
   Bandcamp,

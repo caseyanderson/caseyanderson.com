@@ -103,8 +103,31 @@ for (const slug of slugs) {
   })
 
   const expectedCovers = [...mdx.matchAll(/<Cover\b/g)].length
+  const carouselImages = [...mdx.matchAll(/<Carousel\b[\s\S]*?\/>/g)].flatMap(
+    ([carousel]) => {
+      const sources = carousel.match(/sources=\{\[([\s\S]*?)\]\}/)?.[1]
+      assert.ok(sources, `${path}: carousel needs an explicit sources array`)
+      return [...sources.matchAll(/'([^']+)'/g)].map((match) => match[1])
+    },
+  )
   const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0])
-  assert.equal(images.length, expectedCovers, `${path}: unexpected image count`)
+  assert.equal(
+    images.length,
+    expectedCovers + carouselImages.length,
+    `${path}: unexpected image count`,
+  )
+  for (const source of carouselImages) {
+    // Every slide should render on the server, including before JavaScript loads.
+    assert.ok(
+      images.some((image) => image.includes(source.split('/').pop().replace('.jpg', ''))),
+      `${path}: carousel image missing: ${source}`,
+    )
+  }
+  if (carouselImages.length) {
+    assert.match(html, /aria-roledescription="carousel"/)
+    assert.match(html, /aria-label="Previous photo"/)
+    assert.match(html, /aria-label="Next photo"/)
+  }
   for (const image of images) {
     assert.match(
       image,
