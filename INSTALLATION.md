@@ -52,6 +52,31 @@ Next.js generates responsive optimized images on demand; SVGs stay as SVGs.
 The first request for a new optimized image may take longer than later requests.
 Original files remain available under `/images/filename.jpg`.
 
+## Image carousel
+
+Use `<Carousel>` when a project needs several related photos in one place.
+
+Every image must first be registered in `lib/work-images.ts`. Then add the carousel to the MDX page with an explicit `sources` array:
+
+```mdx
+<Carousel
+  label="Illuminated Heritage Masks workshop photographs"
+  credit="Photographs by Elizabeth Flores"
+  sources={[
+    'illuminated-heritage-masks/dsc04865.jpg',
+    'illuminated-heritage-masks/dsc04870.jpg',
+    'illuminated-heritage-masks/dsc04920.jpg'
+  ]}
+/>
+```
+
+- `label` is required and names the carousel region for screen readers.
+- `sources` must be an explicit array of registered image filenames. The smoke test checks for this.
+- `credit` is optional and appears below the controls as a small caption.
+- Viewers can use the Previous and Next buttons, or left and right arrow keys when the photo area has focus.
+- Slides use a 3:2 frame with `object-fit: contain`, so images are not cropped.
+- The carousel does not autoplay.
+
 ## Embed media
 
 ```mdx

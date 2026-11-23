@@ -54,4 +54,4 @@ The smoke test needs a running server. It checks project pages, images, embeds, 
 
 ## Content editing
 
-See [INSTALLATION.md](./INSTALLATION.md) for project pages, images, embeds, and links.
+See [INSTALLATION.md](./INSTALLATION.md) for project pages, images, carousels, embeds, and links.
